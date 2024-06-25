@@ -7,38 +7,52 @@ String? _getDelimiter(String numbers) {
 }
 
 int add(String numbers) {
-  if (numbers.isEmpty) {
-    return 0;
-  }
+  if (numbers.isEmpty) return 0;
 
-  // if a delimiter is passed, only this delimiter should be used
+  final List<String> errors = [];
+
+  // extract a custom delimiter
   final delimiter = _getDelimiter(numbers) ?? ',';
-  // remove the delimiter from the string
+  // remove the part of the string that contains the delimiter
   numbers = numbers.replaceAll(RegExp(r'//.*\n'), '');
-
   // handle new lines as delimiters
   numbers = numbers.replaceAll('\n', delimiter);
-
-  // if a non number is found (different from the delimiter), throw an error indicating "[delimiter] expected but [found] found at position [position]"
-  if (numbers.contains(RegExp('[^0-9$delimiter-]'))) {
-    final position = numbers.indexOf(RegExp('[^0-9$delimiter-]'));
-    throw FormatException(
-        "'$delimiter' expected but '${numbers[position]}' found at position $position.");
+  // detect other delimiters (not a number(positive or negative) or the custom delimiter) (word) and get the length of the word
+  final otherDelimiters = numbers
+      .split(RegExp('[0-9$delimiter-]'))
+      .where((element) => element.isNotEmpty)
+      .toList();
+  if (otherDelimiters.isNotEmpty) {
+    errors.add(
+        "'$delimiter' expected but '${otherDelimiters.first}' found at position ${numbers.indexOf(otherDelimiters.first)}.");
+    // replace the other delimiters with the custom delimiter
+    numbers = numbers.replaceAll(RegExp('[^0-9$delimiter-]'), delimiter);
   }
 
   final numbersList = numbers.split(delimiter);
-  // give error if multiple delimiters are found together
-  if (numbersList.contains('')) {
-    throw FormatException('Invalid input');
-  }
+  // give error if one of the element is empty
+  errors.addAll(numbersList
+      .asMap()
+      .entries
+      .where((element) => element.value.isEmpty)
+      .map((e) =>
+          "'$delimiter' expected but '${numbers[e.key]}' found at position ${e.key}."));
 
-  List<int> numbersInt = numbersList.map(int.parse).toList();
+  List<int> numbersInt = numbersList
+      .where((element) => element.isNotEmpty)
+      .map(int.parse)
+      .toList();
 
   // if negative numbers are found throw an error "Negative number(s) not allowed: <negativeNumbers>"
+
   final negativeNumbers = numbersInt.where((element) => element < 0).toList();
+
   if (negativeNumbers.isNotEmpty) {
-    throw FormatException(
-        'Negative number(s) not allowed: ${negativeNumbers.join(', ')}');
+    errors.add('Negative number(s) not allowed: ${negativeNumbers.join(', ')}');
+  }
+
+  if (errors.isNotEmpty) {
+    throw FormatException(errors.join('\n'));
   }
 
   return numbersInt.reduce((value, element) => value + element);
