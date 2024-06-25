@@ -94,4 +94,22 @@ void main() {
       );
     },
   );
+
+  // if multiple error are found, the message should indicate all of them (separated by \n)
+  test(
+    'should indicate all errors if multiple errors are found',
+    () {
+      expect(
+        () => add('1,-2,-3,4,-5'),
+        throwsA(
+          isA<FormatException>().having(
+            (e) => e.message,
+            'error message',
+            equals(
+                'Negative number(s) not allowed: -2, -3\nNegative number(s) not allowed: -5'),
+          ),
+        ),
+      );
+    },
+  );
 }
