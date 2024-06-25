@@ -50,4 +50,14 @@ void main() {
       expect(() => add('1,'), throwsFormatException);
     },
   );
+
+  // handle any other delimiters, the delimiters must be specified at the beginning of the string : //[delimiter]\n[numbers]
+  test(
+    'should handle any other delimiters',
+    () {
+      expect(add('//;\n1;2'), 3);
+      expect(add('//|\n1|2|3'), 6);
+      expect(add('//sep\n2sep3'), 5);
+    },
+  );
 }
