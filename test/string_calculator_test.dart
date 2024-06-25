@@ -22,4 +22,11 @@ void main() {
       expect(add('1,2'), 3);
     },
   );
+
+  test(
+    'should return sum of any number of numbers',
+    () {
+      expect(add('1,2,3,4,5'), 15);
+    },
+  );
 }
