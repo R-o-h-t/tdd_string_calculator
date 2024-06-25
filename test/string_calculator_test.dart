@@ -60,4 +60,21 @@ void main() {
       expect(add('//sep\n2sep3'), 5);
     },
   );
+
+  // if a delimiter is specified , only this delimiter should be used
+  test(
+    'should throw an exception if a delimiter is specified and another delimiter is found and indicate the position',
+    () {
+      expect(
+        () => add('//|\n1|2,3'),
+        throwsA(
+          isA<FormatException>().having(
+            (e) => e.message,
+            'error message',
+            equals("'|' expected but ',' found at position 3."),
+          ),
+        ),
+      );
+    },
+  );
 }
