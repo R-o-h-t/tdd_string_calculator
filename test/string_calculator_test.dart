@@ -95,18 +95,20 @@ void main() {
     },
   );
 
-  // if multiple error are found, the message should indicate all of them (separated by \n)
+  // if multiple error are found, the message should indicate
+  // all the errors that were found separated by new lines
   test(
-    'should indicate all errors if multiple errors are found',
+    'should throw an exception if multiple errors are found',
     () {
       expect(
-        () => add('1,-2,-3,4,-5'),
+        () => add('//|\n1|2,-3,4,-5'),
         throwsA(
           isA<FormatException>().having(
             (e) => e.message,
             'error message',
             equals(
-                'Negative number(s) not allowed: -2, -3\nNegative number(s) not allowed: -5'),
+              "'|' expected but ',' found at position 3.\nNegative number(s) not allowed: -3, -5",
+            ),
           ),
         ),
       );
