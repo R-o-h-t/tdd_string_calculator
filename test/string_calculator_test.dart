@@ -8,4 +8,18 @@ void main() {
       expect(add(''), 0);
     },
   );
+
+  test(
+    'should return first nb for a single number',
+    () {
+      expect(add('1'), 1);
+    },
+  );
+
+  test(
+    'should return sum of two numbers',
+    () {
+      expect(add('1,2'), 3);
+    },
+  );
 }
