@@ -29,4 +29,18 @@ void main() {
       expect(add('1,2,3,4,5'), 15);
     },
   );
+
+  test(
+    'should handle new lines as delimiters',
+    () {
+      expect(add('1\n2,3'), 6);
+    },
+  );
+
+  test(
+    'should throw an exception if multiple delimiters are found together',
+    () {
+      expect(() => add('1,\n2'), throwsFormatException);
+    },
+  );
 }
