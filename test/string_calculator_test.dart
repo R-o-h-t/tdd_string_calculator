@@ -43,4 +43,11 @@ void main() {
       expect(() => add('1,\n2'), throwsFormatException);
     },
   );
+
+  test(
+    'should throw an exception if separator is at the end',
+    () {
+      expect(() => add('1,'), throwsFormatException);
+    },
+  );
 }
