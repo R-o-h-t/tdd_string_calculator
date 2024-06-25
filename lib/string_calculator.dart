@@ -20,8 +20,8 @@ int add(String numbers) {
   numbers = numbers.replaceAll('\n', delimiter);
 
   // if a non number is found (different from the delimiter), throw an error indicating "[delimiter] expected but [found] found at position [position]"
-  if (numbers.contains(RegExp('[^0-9$delimiter]'))) {
-    final position = numbers.indexOf(RegExp('[^0-9$delimiter]'));
+  if (numbers.contains(RegExp('[^0-9$delimiter-]'))) {
+    final position = numbers.indexOf(RegExp('[^0-9$delimiter-]'));
     throw FormatException(
         "'$delimiter' expected but '${numbers[position]}' found at position $position.");
   }
@@ -32,5 +32,14 @@ int add(String numbers) {
     throw FormatException('Invalid input');
   }
 
-  return numbersList.map(int.parse).reduce((a, b) => a + b);
+  List<int> numbersInt = numbersList.map(int.parse).toList();
+
+  // if negative numbers are found throw an error "Negative number(s) not allowed: <negativeNumbers>"
+  final negativeNumbers = numbersInt.where((element) => element < 0).toList();
+  if (negativeNumbers.isNotEmpty) {
+    throw FormatException(
+        'Negative number(s) not allowed: ${negativeNumbers.join(', ')}');
+  }
+
+  return numbersInt.reduce((value, element) => value + element);
 }
