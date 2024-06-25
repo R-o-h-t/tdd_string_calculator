@@ -51,6 +51,9 @@ int add(String numbers) {
     errors.add('Negative number(s) not allowed: ${negativeNumbers.join(', ')}');
   }
 
+  // remove > 1000 numbers from the list
+  numbersInt = numbersInt.where((element) => element <= 1000).toList();
+
   if (errors.isNotEmpty) {
     throw FormatException(errors.join('\n'));
   }
