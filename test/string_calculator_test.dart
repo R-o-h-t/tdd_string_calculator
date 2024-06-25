@@ -114,4 +114,12 @@ void main() {
       );
     },
   );
+
+  // if a number is bigger than 1000, it should be ignored
+  test(
+    'should ignore numbers bigger than 1000',
+    () {
+      expect(add('2,1001'), 2);
+    },
+  );
 }
