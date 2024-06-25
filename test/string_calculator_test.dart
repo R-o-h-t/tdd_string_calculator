@@ -77,4 +77,21 @@ void main() {
       );
     },
   );
+
+  // Calling add with negative numbers will return the message 'Negative number(s) not allowed: <negativeNumbers>'
+  test(
+    'should throw an exception if negative numbers are found',
+    () {
+      expect(
+        () => add('1,-2,-3'),
+        throwsA(
+          isA<FormatException>().having(
+            (e) => e.message,
+            'error message',
+            equals('Negative number(s) not allowed: -2, -3'),
+          ),
+        ),
+      );
+    },
+  );
 }
