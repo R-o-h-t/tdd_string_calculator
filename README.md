@@ -1,3 +1,8 @@
+
+# WHOAMI
+
+- **Name**: Raphael MARIE
+
 # String Calculator TDD Project
 
 This project implements the "String Calculator" kata from the TDD Manifesto (https://tddmanifesto.com/exercises/), following the Test-Driven Development (TDD) approach. The goal is to create a simple string calculator that can take a string of numbers separated by commas and return their sum.
@@ -13,7 +18,7 @@ Before you begin, ensure you have Dart installed on your system. If Dart is not 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/string_calculator.git
+   git clone https://github.com/R-o-h-t/tdd_string_calculator.git
    ```
 
 2. **Navigate to the project directory:**
