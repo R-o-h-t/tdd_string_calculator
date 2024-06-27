@@ -45,4 +45,11 @@ void main() {
     expect(add('10\n20,30'), 60);
     expect(add('1\n2\n3,4\n5'), 15);
   });
+
+  /// should not accept 2 consecutive delimiters
+  test('should not accept 2 consecutive delimiters', () {
+    expect(() => add('1,\n2'), throwsFormatException);
+    expect(() => add('10\n,20'), throwsFormatException);
+    expect(() => add('1\n,2\n,3'), throwsFormatException);
+  });
 }
