@@ -10,6 +10,7 @@ void main() {
   /// function should return the number if the string contains only one number
   test('should return the number if the string contains only one number', () {
     expect(add('1'), 1);
+    expect(add('10'), 10);
   });
 
   /// function should return the sum of two numbers if the string contains two numbers
@@ -17,5 +18,6 @@ void main() {
       'should return the sum of two numbers if the string contains two numbers',
       () {
     expect(add('1,2'), 3);
+    expect(add('10,20'), 30);
   });
 }
