@@ -120,4 +120,28 @@ void main() {
     expect(add('//||||\n1||||2||||3'), 6);
     expect(add('//sep\n1sep2sep3'), 6);
   });
+
+  /// should find the position of the invalid character
+
+  /// should return -1 if the string is empty
+  test('should return -1 if the string is empty', () {
+    expect(invalidCharacter(''), -1);
+  });
+
+  /// should return -1 if the string contains only numbers
+  test('should return -1 if the string contains only numbers', () {
+    expect(invalidCharacter('123'), -1);
+  });
+
+  /// should return -1 if the string contains a simple list
+  test('should return -1 if the string contains a simple list', () {
+    expect(invalidCharacter('1,2,3'), -1);
+  });
+
+  /// should return -1 if the string contains a simple list with a custom delimiter
+  test(
+      'should return -1 if the string contains a simple list with a custom delimiter',
+      () {
+    expect(invalidCharacter('1|2|3', delimiter: '|'), -1);
+  });
 }
