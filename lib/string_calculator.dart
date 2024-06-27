@@ -15,6 +15,13 @@ int invalidCharacter(
   String numbers, {
   String delimiter = ',',
 }) {
+  if (numbers.isEmpty) {
+    return -1;
+  }
+  if (numbers[0] == delimiter) {
+    return 0;
+  }
+
   return -1;
 }
 
