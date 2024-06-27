@@ -73,4 +73,18 @@ void main() {
             e is FormatException &&
             e.message == 'Invalid delimiter at position 0')));
   });
+
+  /// throws an error if the string ends with a delimiter
+  test('throws an error if the string ends with a delimiter', () {
+    expect(
+        () => add('1,2,'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid delimiter at position 3')));
+    expect(
+        () => add('1,2\n'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid delimiter at position 3')));
+  });
 }
