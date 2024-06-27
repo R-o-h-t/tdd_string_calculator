@@ -168,4 +168,12 @@ void main() {
     expect(invalidCharacter('1,,2,3'), 2);
     expect(invalidCharacter('1||2|3', delimiter: '|'), 2);
   });
+
+  /// should return the position of unexpected exception (neither the delimiter nor a number)
+  test(
+      'should return the position of unexpected exception (neither the delimiter nor a number)',
+      () {
+    expect(invalidCharacter('1,2,three'), 4);
+    expect(invalidCharacter('1|2|3,4) ', delimiter: '|'), 5);
+  });
 }
