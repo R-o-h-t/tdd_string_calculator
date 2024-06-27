@@ -176,4 +176,35 @@ void main() {
     expect(invalidCharacter('1,2,three'), 4);
     expect(invalidCharacter('1|2|3,4) ', delimiter: '|'), 5);
   });
+
+  // should throw an error indicating the position of the invalid character
+  test('should throw an error indicating the position of the invalid character',
+      () {
+    expect(
+        () => add('1,\n2'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid character found at position 2')));
+    expect(
+        () => add('1\n,2'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid character found at position 2')));
+  });
+
+  // if using a custom delimiter, any other delimiter should be considered invalid
+  test(
+      'if using a custom delimiter, any other delimiter should be considered invalid',
+      () {
+    expect(
+        () => add('//;\n1,2;3'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid character found at position 1')));
+    expect(
+        () => add('//|\n1,2|3'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid character found at position 1')));
+  });
 }
