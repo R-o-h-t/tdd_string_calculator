@@ -28,6 +28,10 @@ int invalidCharacter(
     return numbers.indexOf(RegExp(RegExp.escape(delimiter) + r'{2,}')) + 1;
   }
 
+  if (numbers.contains(RegExp(r'[^0-9' + RegExp.escape(delimiter) + r']'))) {
+    return numbers.indexOf(RegExp(r'[^0-9' + RegExp.escape(delimiter) + r']'));
+  }
+
   return -1;
 }
 
