@@ -20,4 +20,14 @@ void main() {
     expect(add('1,2'), 3);
     expect(add('10,20'), 30);
   });
+
+  /// function should return the sum of multiple numbers if the string contains multiple numbers
+  /// separated by commas
+  test(
+      'should return the sum of multiple numbers if the string contains multiple numbers separated by commas',
+      () {
+    expect(add('1,2,3'), 6);
+    expect(add('10,20,30'), 60);
+    expect(add('1,2,3,4,5'), 15);
+  });
 }
