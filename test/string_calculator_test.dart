@@ -87,4 +87,19 @@ void main() {
             e is FormatException &&
             e.message == 'Invalid delimiter at position 3')));
   });
+
+  /// should find the custom delimiter in the string
+  /// and return it
+  test('should find the custom delimiter in the string and return it', () {
+    expect(getCustomDelimiter('//;\n1;2'), ';');
+    expect(getCustomDelimiter('//|\n1|2|3'), '|');
+    expect(getCustomDelimiter('//@\n1@2@3@4@5'), '@');
+  });
+
+  /// should return null if the string does not contain a custom delimiter
+  test('should return null if the string does not contain a custom delimiter',
+      () {
+    expect(getCustomDelimiter('1,2,3'), null);
+    expect(getCustomDelimiter('1\n2\n3'), null);
+  });
 }
