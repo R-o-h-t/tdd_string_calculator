@@ -59,4 +59,18 @@ void main() {
             e is FormatException &&
             e.message == 'Invalid delimiter at position 2')));
   });
+
+  /// throws an error if the string begins with a delimiter
+  test('throws an error if the string begins with a delimiter', () {
+    expect(
+        () => add(',1,2'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid delimiter at position 0')));
+    expect(
+        () => add('\n1,2'),
+        throwsA(predicate((e) =>
+            e is FormatException &&
+            e.message == 'Invalid delimiter at position 0')));
+  });
 }
