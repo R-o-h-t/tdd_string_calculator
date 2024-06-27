@@ -160,4 +160,12 @@ void main() {
     expect(invalidCharacter('1,2,3,'), 5);
     expect(invalidCharacter('1|2|3|', delimiter: '|'), 5);
   });
+
+  /// should return the position of the invalid character : consecutive delimiters
+  test(
+      'should return the position of the invalid character : consecutive delimiters',
+      () {
+    expect(invalidCharacter('1,,2,3'), 2);
+    expect(invalidCharacter('1||2|3', delimiter: '|'), 2);
+  });
 }
