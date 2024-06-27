@@ -24,6 +24,9 @@ int invalidCharacter(
   if (numbers[numbers.length - 1] == delimiter) {
     return numbers.length - 1;
   }
+  if (numbers.contains(RegExp(RegExp.escape(delimiter) + r'{2,}'))) {
+    return numbers.indexOf(RegExp(RegExp.escape(delimiter) + r'{2,}')) + 1;
+  }
 
   return -1;
 }
