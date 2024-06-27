@@ -30,4 +30,11 @@ void main() {
     expect(add('10,20,30'), 60);
     expect(add('1,2,3,4,5'), 15);
   });
+
+  /// should allow new lines between numbers
+  test('should allow new lines between numbers', () {
+    expect(add('1\n2,3'), 6);
+    expect(add('10\n20\n30'), 60);
+    expect(add('1\n2\n3\n4\n5'), 15);
+  });
 }
