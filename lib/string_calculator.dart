@@ -15,7 +15,7 @@ int invalidCharacter(
   String numbers, {
   String delimiter = ',',
 }) {
-  throw UnimplementedError();
+  return -1;
 }
 
 /// Add function
