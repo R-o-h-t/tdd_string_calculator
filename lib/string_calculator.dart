@@ -3,18 +3,23 @@ int add(String numbers) {
   if (numbers.isEmpty) {
     return 0;
   }
-  numbers = numbers.replaceAll('\n', ',');
-  if (numbers.contains(',,')) {
-    throw FormatException(
-        'Invalid delimiter at position ${numbers.indexOf(',,') + 1}');
-  }
-  if (numbers.startsWith(',')) {
+  // Check if the string begins with a delimiter
+  if (numbers.startsWith(',') || numbers.startsWith('\n')) {
     throw FormatException('Invalid delimiter at position 0');
   }
-  if (numbers.endsWith(',')) {
+  // Check if the string ends with a delimiter
+  if (numbers.endsWith(',') || numbers.endsWith('\n')) {
     throw FormatException(
         'Invalid delimiter at position ${numbers.length - 1}');
   }
+  // Check if the string contains consecutive delimiters
+  if (numbers.contains(RegExp(r',\n|\n,'))) {
+    // indicate the position of the invalid delimiter (the second)
+    throw FormatException(
+        'Invalid delimiter at position ${numbers.indexOf(RegExp(r',\n|\n,')) + 1}');
+  }
+
+  numbers = numbers.replaceAll('\n', ',');
 
   final List<int> numbersList = numbers.split(',').map(int.parse).toList();
   return numbersList.reduce((int a, int b) => a + b);
