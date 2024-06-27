@@ -6,4 +6,9 @@ void main() {
   test('should return 0 if the string is empty', () {
     expect(add(''), 0);
   });
+
+  /// function should return the number if the string contains only one number
+  test('should return the number if the string contains only one number', () {
+    expect(add('1'), 1);
+  });
 }
