@@ -46,18 +46,19 @@ void main() {
     expect(add('1\n2\n3,4\n5'), 15);
   });
 
-  /// the error should indicate the position of the invalid delimiter
-  test('the error should indicate the position of the invalid delimiter', () {
+  /// the error should indicate the position of the Invalid character found
+  test('the error should indicate the position of the Invalid character found',
+      () {
     expect(
         () => add('1,\n2'),
         throwsA(predicate((e) =>
             e is FormatException &&
-            e.message == 'Invalid delimiter at position 2')));
+            e.message == 'Invalid character found at position 2')));
     expect(
         () => add('1\n,2'),
         throwsA(predicate((e) =>
             e is FormatException &&
-            e.message == 'Invalid delimiter at position 2')));
+            e.message == 'Invalid character found at position 2')));
   });
 
   /// throws an error if the string begins with a delimiter
@@ -66,12 +67,12 @@ void main() {
         () => add(',1,2'),
         throwsA(predicate((e) =>
             e is FormatException &&
-            e.message == 'Invalid delimiter at position 0')));
+            e.message == 'Invalid character found at position 0')));
     expect(
         () => add('\n1,2'),
         throwsA(predicate((e) =>
             e is FormatException &&
-            e.message == 'Invalid delimiter at position 0')));
+            e.message == 'Invalid character found at position 0')));
   });
 
   /// throws an error if the string ends with a delimiter
@@ -80,12 +81,12 @@ void main() {
         () => add('1,2,'),
         throwsA(predicate((e) =>
             e is FormatException &&
-            e.message == 'Invalid delimiter at position 3')));
+            e.message == 'Invalid character found at position 3')));
     expect(
         () => add('1,2\n'),
         throwsA(predicate((e) =>
             e is FormatException &&
-            e.message == 'Invalid delimiter at position 3')));
+            e.message == 'Invalid character found at position 3')));
   });
 
   /// should find the custom delimiter in the string
