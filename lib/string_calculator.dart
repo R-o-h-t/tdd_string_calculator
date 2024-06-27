@@ -1,4 +1,8 @@
 /// Add function
 int add(String numbers) {
-  return int.tryParse(numbers) ?? 0;
+  if (numbers.isEmpty) {
+    return 0;
+  }
+  final List<int> numbersList = numbers.split(',').map(int.parse).toList();
+  return numbersList.reduce((int a, int b) => a + b);
 }
