@@ -21,6 +21,9 @@ int invalidCharacter(
   if (numbers[0] == delimiter) {
     return 0;
   }
+  if (numbers[numbers.length - 1] == delimiter) {
+    return numbers.length - 1;
+  }
 
   return -1;
 }
