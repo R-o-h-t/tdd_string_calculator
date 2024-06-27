@@ -15,23 +15,29 @@ int invalidCharacter(
   String numbers, {
   String delimiter = ',',
 }) {
-  if (numbers.isEmpty) {
-    return -1;
-  }
-  if (numbers[0] == delimiter) {
-    return 0;
-  }
-  if (numbers[numbers.length - 1] == delimiter) {
-    return numbers.length - 1;
-  }
-  if (numbers.contains(RegExp(RegExp.escape(delimiter) + r'{2,}'))) {
-    return numbers.indexOf(RegExp(RegExp.escape(delimiter) + r'{2,}')) + 1;
+  // Return -1 immediately if the input string is empty
+  if (numbers.isEmpty) return -1;
+
+  // Check if the string starts or ends with the delimiter
+  if (numbers.startsWith(delimiter) || numbers.endsWith(delimiter)) {
+    return numbers.startsWith(delimiter) ? 0 : numbers.length - 1;
   }
 
-  if (numbers.contains(RegExp(r'[^0-9' + RegExp.escape(delimiter) + r']'))) {
-    return numbers.indexOf(RegExp(r'[^0-9' + RegExp.escape(delimiter) + r']'));
+  // Create RegExp objects once and reuse
+  final doubleDelimiterRegExp = RegExp(RegExp.escape(delimiter) + r'{2,}');
+  final invalidCharRegExp = RegExp(r'[^0-9' + RegExp.escape(delimiter) + r']');
+
+  // Check for consecutive delimiters
+  if (numbers.contains(doubleDelimiterRegExp)) {
+    return numbers.indexOf(doubleDelimiterRegExp) + 1;
   }
 
+  // Check for any character that is not a number or the delimiter
+  if (numbers.contains(invalidCharRegExp)) {
+    return numbers.indexOf(invalidCharRegExp);
+  }
+
+  // If none of the conditions are met, return -1
   return -1;
 }
 
