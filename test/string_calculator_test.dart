@@ -102,4 +102,14 @@ void main() {
     expect(getCustomDelimiter('1,2,3'), null);
     expect(getCustomDelimiter('1\n2\n3'), null);
   });
+
+  /// should use the custom delimiter to split the string
+  /// and return the sum of the numbers
+  test(
+      'should use the custom delimiter to split the string and return the sum of the numbers',
+      () {
+    expect(add('//;\n1;2'), 3);
+    expect(add('//|\n1|2|3'), 6);
+    expect(add('//@\n1@2@3@4@5'), 15);
+  });
 }
