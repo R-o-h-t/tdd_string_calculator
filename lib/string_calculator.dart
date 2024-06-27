@@ -1,3 +1,12 @@
+String? getCustomDelimiter(String numbers) {
+  if (numbers.startsWith('//')) {
+    final int delimiterEnd = numbers.indexOf('\n');
+    final String delimiter = numbers.substring(2, delimiterEnd);
+    return delimiter;
+  }
+  return null;
+}
+
 /// Add function
 int add(String numbers) {
   if (numbers.isEmpty) {
