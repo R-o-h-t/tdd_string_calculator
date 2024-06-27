@@ -37,4 +37,12 @@ void main() {
     expect(add('10\n20\n30'), 60);
     expect(add('1\n2\n3\n4\n5'), 15);
   });
+
+  /// should allow both new lines and commas between numbers in the string
+  test('should allow both new lines and commas between numbers in the string',
+      () {
+    expect(add('1\n2,3'), 6);
+    expect(add('10\n20,30'), 60);
+    expect(add('1\n2\n3,4\n5'), 15);
+  });
 }
