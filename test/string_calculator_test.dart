@@ -112,4 +112,11 @@ void main() {
     expect(add('//|\n1|2|3'), 6);
     expect(add('//@\n1@2@3@4@5'), 15);
   });
+
+  /// should allow custom delimiters of any length
+  test('should allow custom delimiters of any length', () {
+    expect(add('//;;;\n1;;;2;;;3'), 6);
+    expect(add('//||||\n1||||2||||3'), 6);
+    expect(add('//sep\n1sep2sep3'), 6);
+  });
 }
