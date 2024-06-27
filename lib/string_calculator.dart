@@ -12,6 +12,13 @@ int add(String numbers) {
   if (numbers.isEmpty) {
     return 0;
   }
+
+  final String? customDelimiter = getCustomDelimiter(numbers);
+  if (customDelimiter != null) {
+    numbers = numbers.substring(numbers.indexOf('\n') + 1);
+    numbers = numbers.replaceAll(customDelimiter, ',');
+  }
+
   // Check if the string begins with a delimiter
   if (numbers.startsWith(',') || numbers.startsWith('\n')) {
     throw FormatException('Invalid delimiter at position 0');
