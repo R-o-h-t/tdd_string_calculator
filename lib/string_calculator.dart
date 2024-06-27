@@ -1,4 +1,4 @@
 /// Add function
 int add(String numbers) {
-  return 0;
+  return int.tryParse(numbers) ?? 0;
 }
