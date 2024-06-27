@@ -11,4 +11,11 @@ void main() {
   test('should return the number if the string contains only one number', () {
     expect(add('1'), 1);
   });
+
+  /// function should return the sum of two numbers if the string contains two numbers
+  test(
+      'should return the sum of two numbers if the string contains two numbers',
+      () {
+    expect(add('1,2'), 3);
+  });
 }
